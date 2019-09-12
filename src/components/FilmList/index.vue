@@ -1,16 +1,19 @@
 <template>
   <div class="film-list">
     <ul class="film-list__ul">
-      <li class="film-list__item">
+      <li class="film-list__item" v-for="item in films" :key="item.filmId">
         <a href="#">
           <div class="film-img">
-            <img src alt />
+            <img :src="item.poster" alt />
           </div>
           <div class="film-info">
-            <p class="film-info-title"></p>
-            <p class="film-info-grade">观众评分7</p>
+            <p class="film-info-title">{{item.name}}</p>
+            <p class="film-info-grade" :style="{visibility: item.grade? '':'hidden'}">
+              观众评分
+              <span>{{ item.grade }}</span>
+            </p>
             <p class="film-info-actors">主演：</p>
-            <p class="film-info-detail">美国 xxx | 133分钟</p>
+            <p class="film-info-detail">{{item.nation}} | {{ item.runtime }}分钟</p>
           </div>
           <div class="film-btn">
             <button>购票</button>
@@ -24,7 +27,10 @@
 
 <script>
 export default {
-  name: 'FilmList'
+  name: 'FilmList',
+  props: {
+    films: Array
+  }
 }
 </script>
 
@@ -70,6 +76,10 @@ export default {
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+
+      span {
+        color: #ff5f16;
+      }
     }
 
     .film-info-title {

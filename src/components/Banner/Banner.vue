@@ -1,6 +1,6 @@
 <template>
   <div class="film-bannerimg">
-    <van-swipe :autoplay="1500">
+    <van-swipe :autoplay="1500" indicator-color="#ffff">
       <van-swipe-item v-for="img in imgs" :key="img.bannerId">
         <img :src="img" alt />
       </van-swipe-item>

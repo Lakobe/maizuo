@@ -21,6 +21,9 @@ export default {
 </script>
 
 <style lang="scss">
+.page-index {
+  margin-bottom: 50px;
+}
 .van-tabbar-item--active {
   color: #ff5f16;
 }
