@@ -32,11 +32,14 @@ export default {
     ...mapActions('film', ['getBannerList', 'getFilmList'])
   },
   created() {
-    // this.getBannerList() //官网轮播图关闭暂不调用
+    this.getBannerList() //官网轮播图关闭暂不调用
     this.getFilmList()
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.van-tabs__line {
+  background-color: #ff5f16;
+}
 </style>

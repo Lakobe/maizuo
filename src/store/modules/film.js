@@ -6,7 +6,7 @@ export default {
 
   state: {
     bannerList: [],// 热门影片轮播图数据
-    filmlist: []
+    filmlist: []// 热门影片数据
   },
 
   getters: {
@@ -19,6 +19,7 @@ export default {
     setBannerList(state, payload) {
       state.bannerList = payload
     },
+
     setfilmList(state, payload) {
       state.filmlist = payload.films
     }

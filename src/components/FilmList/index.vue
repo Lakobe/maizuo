@@ -7,12 +7,15 @@
             <img :src="item.poster" alt />
           </div>
           <div class="film-info">
-            <p class="film-info-title">{{item.name}}</p>
+            <p class="film-info-title">
+              {{item.name}}
+              <i>{{ item.filmType.name }}</i>
+            </p>
             <p class="film-info-grade" :style="{visibility: item.grade? '':'hidden'}">
               观众评分
               <span>{{ item.grade }}</span>
             </p>
-            <p class="film-info-actors">主演：</p>
+            <p class="film-info-actors">主演：{{ item.actors | formatActors('1') }}</p>
             <p class="film-info-detail">{{item.nation}} | {{ item.runtime }}分钟</p>
           </div>
           <div class="film-btn">
@@ -30,6 +33,18 @@ export default {
   name: 'FilmList',
   props: {
     films: Array
+  },
+
+  //过滤器选项  导演
+  filters: {
+    formatActors: function(value = []) {
+      //取出主演数组中的某个name数据，生成一个新的数组
+      let arr = value.map(item => item.name)
+      //再将字符串拼接成字符串
+      let str = arr.join(' ')
+      //返回出去
+      return str
+    }
   }
 }
 </script>
@@ -70,12 +85,23 @@ export default {
     flex: 1;
     overflow: hidden;
     line-height: 1.6;
+    max-width: calc(100% - 25px);
 
     p {
       height: 20px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+
+      i {
+        font-size: 9px;
+        color: #fff;
+        background-color: #d2d6dc;
+        height: 14px;
+        line-height: 14px;
+        padding: 0 2px;
+        border-radius: 2px;
+      }
 
       span {
         color: #ff5f16;

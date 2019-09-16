@@ -25,4 +25,8 @@ export default {
     height: 100%;
   }
 }
+.van-swipe__indicators {
+  left: auto !important;
+  right: 12px !important;
+}
 </style>
