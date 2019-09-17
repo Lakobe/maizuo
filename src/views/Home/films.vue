@@ -1,7 +1,15 @@
 <template>
   <div class="page-home">
     <Banner :imgs="bannerListImgs" />
-    <van-tabs v-model="active">
+    <van-tabs
+      v-model="active"
+      sticky
+      color="#ff5f16"
+      title-active-color="#ff5f16"
+      title-inactive-color="#333333"
+      line-width="55"
+      line-height="2px"
+    >
       <van-tab title="正在热映">
         <FilmList :films="filmlist" />
       </van-tab>
@@ -39,7 +47,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.van-tabs__line {
-  background-color: #ff5f16;
-}
 </style>
