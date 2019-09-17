@@ -6,7 +6,8 @@ export default {
 
   state: {
     bannerList: [],// 热门影片轮播图数据
-    filmlist: []// 热门影片数据
+    filmlist: [], // 热门影片数据
+    total: 1 // 一共多少条数据
   },
 
   getters: {
@@ -21,7 +22,8 @@ export default {
     },
 
     setfilmList(state, payload) {
-      state.filmlist = payload.films
+      state.filmlist.push(...payload.films)
+      state.total = payload.total
     }
   },
 
@@ -42,28 +44,33 @@ export default {
     },
 
     //获取影片列表数据
-    getFilmList({ commit }) {
-      request.get('https://m.maizuo.com/gateway', {
-        params: {
-          cityId: 440300,
-          pageNum: 1,
-          pageSize: 10,
-          type: 1,
-          k: 3111049,
-        },
-        headers: {
-          'X-Client-Info': '{"a":"3000","ch":"1002","v":"5.0.4","e":"1565228528352187318344"}',
-          'X-Host': 'mall.film-ticket.film.list'
-        }
-      }).then(res => {
-        console.log(res);
-        if (res.status === 0) {
-          commit({
-            type: 'setfilmList',
-            films: res.data.films
-          })
-        }
-      })
+    getFilmList({ commit }, payload) {
+      setTimeout(() => {
+        request.get('https://m.maizuo.com/gateway', {
+          params: {
+            cityId: 440300,
+            pageNum: payload.pageNum,
+            pageSize: payload.pageSize,
+            type: 1,
+            k: 3111049,
+          },
+          headers: {
+            'X-Client-Info': '{"a":"3000","ch":"1002","v":"5.0.4","e":"1565228528352187318344"}',
+            'X-Host': 'mall.film-ticket.film.list'
+          }
+        }).then(res => {
+          console.log(res);
+          if (res.status === 0) {
+            commit({
+              type: 'setfilmList',
+              films: res.data.films,
+              total: res.data.total
+            })
+            payload.callback()
+          }
+        })
+      }, 1000);
+
     }
   }
 }

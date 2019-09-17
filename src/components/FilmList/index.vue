@@ -121,8 +121,8 @@ export default {
       width: 50px;
       height: 25px;
       border-radius: 2px;
-      border: 1px solid #ff5f16;
-      color: #ff5f16;
+      border: 1px solid #ffb232;
+      color: #ffb232;
       background: none;
     }
   }
